@@ -36,6 +36,12 @@ FEEDS = [
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCn70vKPtIPkD0W8ISmwlK0A", # kayleescozyasmr
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCDfpxS7GiqyoUeXS-zAutoA", # emmyasmrr
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCikebqFWoT3QC9axUbXCPYw", # asmrdarling
+    "http://www.youtube.com/feeds/videos.xml?channel_id=UC1RhnYhnff_n73j6rqI2bxw",
+    "http://www.youtube.com/feeds/videos.xml?channel_id=UCJEEp1K8e7mH9UDnvB7vQtQ",
+    "http://www.youtube.com/feeds/videos.xml?channel_id=UCuY8UOqVmzRw9pCK2Gxr5Aw",
+    "http://www.youtube.com/feeds/videos.xml?channel_id=UCkFodjV_8nOBHUj6gh8b8Vw",
+    "http://www.youtube.com/feeds/videos.xml?channel_id=UCfGRBgC-akNg9OuCMh6CGfw",
+    "http://www.youtube.com/feeds/videos.xml?channel_id=UCAP-gp9fHTc0NzA4dyUzRAg",
 ]
 
 KEYWORDS = ['affirmation', 'affirmations', 'subconscious', 'positive']
