@@ -59,7 +59,7 @@ def main():
         if now >= reminder_time or i > 0:
             all_entries.append({
                 'title': f"Daily Affirmation Reminder - {reminder_time.strftime('%A, %B %d')}",
-                'link': f'https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/#reminder-{reminder_time.strftime("%Y%m%d")}',
+                'link': f'https://maxmrry.github.io/positive-rss-aggregator/#reminder-{reminder_time.strftime("%Y%m%d")}',
                 'description': 'Take a deep breath. You are doing great today. Stay positive and keep your stoke levels high!',
                 'published': reminder_time,
                 'id': f"reminder-{reminder_time.strftime('%Y%m%d')}"
