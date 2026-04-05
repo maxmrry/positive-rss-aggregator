@@ -12,12 +12,12 @@ FEEDS = [
 ]
 
 # The "Gate": Only allow entries containing these words
-KEYWORDS = ['affirmation', 'positive', 'purpose', 'health'] 
+KEYWORDS = ['affirmation', 'affirmations', 'positive'] 
 
 # Reminder Configuration
-TIMEZONE = pytz.timezone('Europe/London')
-REMINDER_HOUR = 9   # 9 AM
-REMINDER_MINUTE = 0 # 00 Minutes
+TIMEZONE = pytz.timezone('Europe/Paris')
+REMINDER_HOUR = 23   # 11 PM France
+REMINDER_MINUTE = 0
 # ---------------------
 
 def main():
@@ -58,9 +58,9 @@ def main():
         # Only add today's reminder if the current time has actually passed the scheduled time
         if now >= reminder_time or i > 0:
             all_entries.append({
-                'title': f"Daily Affirmation Reminder - {reminder_time.strftime('%A, %B %d')}",
-                'link': f'https://maxmrry.github.io/positive-rss-aggregator/#reminder-{reminder_time.strftime("%Y%m%d")}',
-                'description': 'Take a deep breath. You are doing great today. Stay positive and keep your stoke levels high!',
+                'title': '✅ Remember to do daily positive affirmations',
+                'link': '',  # No link
+                'description': '',  # No extra text
                 'published': reminder_time,
                 'id': f"reminder-{reminder_time.strftime('%Y%m%d')}"
             })
