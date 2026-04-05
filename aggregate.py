@@ -70,7 +70,7 @@ def is_relevant(title, desc):
 def main():
     fg = FeedGenerator()
     fg.title('Filtered Positive Feed')
-    fg.link(href='https://maxmrry.github.io/positive-rss-aggregator/feed.xml', rel='self')
+    fg.link(href='https://maxmrry.github.io/positive-rss-aggregator/', rel='alternate')
     fg.description('Aggregated YouTube feeds with daily reminders.')
     
     # --- ADD MAIN FEED IMAGE ---
@@ -121,7 +121,7 @@ def main():
             all_entries.append({
                 'title': '✅ Remember to do daily positive affirmations',
                 'link': f"https://maxmrry.github.io/positive-rss-aggregator/#reminder-{reminder_time.strftime('%Y%m%d')}",
-                'description': 'Take a deep breath. You are doing great today. Stay positive and keep your stoke levels high!',
+                'description': '',
                 'published': reminder_time,
                 'id': f"reminder-{reminder_time.strftime('%Y%m%d')}"
             })
