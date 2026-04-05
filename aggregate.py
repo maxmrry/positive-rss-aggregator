@@ -72,7 +72,8 @@ def main():
     for item in all_entries:
         fe = fg.add_entry()
         fe.title(item['title'])
-        fe.link(href=item['link'])
+        if item['link']:
+            fe.link(href=item['link'])
         fe.description(item['description'])
         fe.pubDate(item['published'])
         fe.id(item['id'])
