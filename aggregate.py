@@ -48,6 +48,8 @@ def main():
 
     all_entries = []
 
+    cutoff = datetime.now(TIMEZONE) - timedelta(days=14)
+
     # 1. Fetch and Filter YouTube Feeds
     for url in FEEDS:
         parsed = feedparser.parse(url)
@@ -55,9 +57,9 @@ def main():
             title = entry.get('title', '')
             desc = entry.get('summary', '')
 
-            if is_relevant(title, desc):
-                pub_date = date_parser.parse(entry.published)
+            pub_date = date_parser.parse(entry.published)
 
+            if is_relevant(title, desc) and pub_date >= cutoff:
                 all_entries.append({
                     'title': entry.title,
                     'link': entry.link,
