@@ -52,19 +52,15 @@ def count_keyword_matches(text, keywords):
         if re.search(rf'\b{kw}\b', text, re.IGNORECASE)
     )
 
-def is_relevant(title, desc):
-    """Weighted relevance check."""
+def is_relevant(title):
+    """Strict relevance check: Keywords MUST be in the title."""
     title_matches = count_keyword_matches(title, KEYWORDS)
-    desc_matches = count_keyword_matches(desc, KEYWORDS)
 
-    # ✅ Strong signal: title match
+    # ✅ Only pass if the title has a keyword
     if title_matches >= 1:
         return True
 
-    # ⚠️ Weak signal: require match in description (Fixed to 1)
-    if desc_matches >= 1:
-        return True
-
+    # ❌ We no longer check the description for keywords
     return False
 
 def main():
@@ -76,7 +72,7 @@ def main():
     # --- ADD MAIN FEED IMAGE ---
     image_url = 'https://raw.githubusercontent.com/maxmrry/positive-rss-aggregator/main/Moon.png'
     fg.logo(image_url)
-    fg.image(url=image_url, title='Filtered Positive Feed', link='https://maxmrry.github.io/positive-rss-aggregator/feed.xml')
+    fg.image(url=image_url, title='Filtered Positive Feed', link='https://maxmrry.github.io/positive-rss-aggregator/docs/feed.xml')
 
     all_entries = []
 
@@ -87,11 +83,11 @@ def main():
         parsed = feedparser.parse(url)
         for entry in parsed.entries:
             title = entry.get('title', '')
-            desc = entry.get('summary', '')
-
+            
             pub_date = date_parser.parse(entry.published)
 
-            if is_relevant(title, desc) and pub_date >= cutoff:
+            # Pass only the title to the gatekeeper
+            if is_relevant(title) and pub_date >= cutoff:
                 # Extract the highest resolution YouTube thumbnail available
                 thumbnails = entry.get('media_thumbnail', [])
                 thumb_url = thumbnails[0]['url'] if thumbnails else ''
@@ -121,7 +117,7 @@ def main():
             all_entries.append({
                 'title': '✅ Remember to do daily positive affirmations',
                 'link': f"https://maxmrry.github.io/positive-rss-aggregator/#reminder-{reminder_time.strftime('%Y%m%d')}",
-                'description': '',
+                'description': '', # Empty description for reminders
                 'published': reminder_time,
                 'id': f"reminder-{reminder_time.strftime('%Y%m%d')}"
             })
