@@ -61,8 +61,8 @@ def is_relevant(title, desc):
     if title_matches >= 1:
         return True
 
-    # ⚠️ Weak signal: require stronger match in description
-    if desc_matches >= 2:
+    # ⚠️ Weak signal: require match in description (Fixed to 1)
+    if desc_matches >= 1:
         return True
 
     return False
@@ -72,6 +72,11 @@ def main():
     fg.title('Filtered Positive Feed')
     fg.link(href='https://maxmrry.github.io/positive-rss-aggregator/feed.xml', rel='self')
     fg.description('Aggregated YouTube feeds with daily reminders.')
+    
+    # --- ADD MAIN FEED IMAGE ---
+    image_url = 'https://raw.githubusercontent.com/maxmrry/positive-rss-aggregator/main/Moon.png'
+    fg.logo(image_url)
+    fg.image(url=image_url, title='Filtered Positive Feed', link='https://maxmrry.github.io/positive-rss-aggregator/feed.xml')
 
     all_entries = []
 
@@ -87,12 +92,17 @@ def main():
             pub_date = date_parser.parse(entry.published)
 
             if is_relevant(title, desc) and pub_date >= cutoff:
+                # Extract the highest resolution YouTube thumbnail available
+                thumbnails = entry.get('media_thumbnail', [])
+                thumb_url = thumbnails[0]['url'] if thumbnails else ''
+
                 all_entries.append({
                     'title': entry.title,
                     'link': entry.link,
                     'description': entry.get('summary', ''),
                     'published': pub_date,
-                    'id': entry.id
+                    'id': entry.id,
+                    'thumbnail': thumb_url
                 })
 
     # 2. Add Daily Reminders
@@ -110,8 +120,8 @@ def main():
         if now >= reminder_time or i > 0:
             all_entries.append({
                 'title': '✅ Remember to do daily positive affirmations',
-                'link': f'https://maxmrry.github.io/positive-rss-aggregator/#reminder-{reminder_time.strftime("%Y%m%d")}',
-                'description': '',
+                'link': f"https://maxmrry.github.io/positive-rss-aggregator/#reminder-{reminder_time.strftime('%Y%m%d')}",
+                'description': 'Take a deep breath. You are doing great today. Stay positive and keep your stoke levels high!',
                 'published': reminder_time,
                 'id': f"reminder-{reminder_time.strftime('%Y%m%d')}"
             })
@@ -124,11 +134,20 @@ def main():
         fe = fg.add_entry()
         fe.title(item['title'])
 
-        if item['link']:
+        if item.get('link'):
             fe.link(href=item['link'])
 
-        if item['description']:
-            fe.description(item['description'])
+        # Inject the thumbnail image into the description text
+        final_desc = ""
+        if item.get('thumbnail'):
+            fe.enclosure(item['thumbnail'], 0, 'image/jpeg') 
+            final_desc += f"<img src='{item['thumbnail']}' alt='thumbnail'/><br><br>"
+            
+        if item.get('description'):
+            final_desc += item['description']
+            
+        if final_desc:
+            fe.description(final_desc)
 
         fe.pubDate(item['published'])
         fe.id(item['id'])
