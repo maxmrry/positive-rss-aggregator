@@ -70,7 +70,7 @@ def is_relevant(title, desc):
 def main():
     fg = FeedGenerator()
     fg.title('Filtered Positive Feed')
-    fg.link(href='https://maxmrry.github.io/positive-rss-aggregator/', rel='alternate')
+    fg.link(href='https://maxmrry.github.io/positive-rss-aggregator/docs/', rel='alternate')
     fg.description('Aggregated YouTube feeds with daily reminders.')
     
     # --- ADD MAIN FEED IMAGE ---
