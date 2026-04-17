@@ -82,7 +82,7 @@ def main():
 
     all_entries = []
 
-    cutoff = datetime.now(TIMEZONE) - timedelta(days=60)
+    # cutoff = datetime.now(TIMEZONE) - timedelta(days=60) # old date limig
 
     # 1. Fetch and Filter YouTube Feeds
     for url in FEEDS:
@@ -93,7 +93,8 @@ def main():
             pub_date = date_parser.parse(entry.published)
 
             # Pass only the title to the gatekeeper
-            if is_relevant(title) and pub_date >= cutoff:
+            # if is_relevant(title) and pub_date >= cutoff: # old cutoff code
+            if is_relevant(title):
                 # Extract the highest resolution YouTube thumbnail available
                 thumbnails = entry.get('media_thumbnail', [])
                 thumb_url = thumbnails[0]['url'] if thumbnails else ''
