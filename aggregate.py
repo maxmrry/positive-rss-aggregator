@@ -9,7 +9,6 @@ import re
 # --- CONFIGURATION ---
 FEEDS = [
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCE6acMV3m35znLcf0JGNn7Q", # gibiasmr
-    "http://www.youtube.com/feeds/videos.xml?channel_id=UCsr9ZL41tukMWLrqK-Edqaw", # kjtingles
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCVtQes1mJsOQVxqloWiMXxg", # tinglesbyjess
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCBsVm9XFIPhnyerJiSlCv5g", # caitasmr
     "http://www.youtube.com/feeds/videos.xml?channel_id=UCoviXqo4b1MAAkjRWEPJrBg", # busybasmr
